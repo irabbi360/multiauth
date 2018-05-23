@@ -38,7 +38,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             //generates a random string that is 20 characters long
-            'token' => str_random(20)
+            //'token' => str_random(20)
         ]);
 
        /* $data['token']  = $user->token;
