@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Mail;
-class RegisterController extends Controller
+use App\Notifications\UserRegisteredNotification;
+
+class RegisterController2 extends Controller
 {
     use RegistersUsers;
 
@@ -35,10 +37,28 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            //generates a random string that is 20 characters long
+            'token' => str_random(20)
         ]);
+
+       /* $data['token']  = $user->token;
+
+        Mail::send('mails.welcome', $data, function($message) use ($data)
+        {
+            $message->from('no-reply@site.com', "Site name");
+            $message->subject("Welcome to site name");
+            $message->to($data['email']);
+        });
+
+
+        return $user;*/
     }
 
-    protected function register(Request $request){
+    protected function registered(Request $request, $user) {
+        $user->notify(new UserRegisteredNotification($user));
+    }
+
+   /* protected function register(Request $request){
         $input = $request->all();
         $validator = $this->validator($input);
 
@@ -73,7 +93,7 @@ class RegisterController extends Controller
             return redirect(route('login'))->with('status', 'Your account is actived');
         }
         return redirect(route('login'))->with('status', 'Something went wrong !!!');
-    }
+    }*/
 
 //    public function postRegister(Request $request) {
 //        $rules = [

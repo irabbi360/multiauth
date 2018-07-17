@@ -23,7 +23,15 @@ Route::get('/users/confirmation/{token}', 'Auth\RegisterController@confirmation'
 
 
 Route::get('admin/home', 'AdminController@index');
+
+Route::get('ki', 'KiController@fileCopy');
+Route::post('file-upgrading', 'KiController@fileUpgrading')->name('fileUpgrading');
+
+
+Route::get('create', 'KiController@create')->name('create');
+Route::post('store', 'KiController@store')->name('store');
+
 //Route::get('');
 
-//Route::get('auth/register', 'Auth\RegisterController@getRegister');
-//Route::post('auth/register', ['as' => 'register', 'uses' => 'Auth\RegisterController@postRegister']);
+//Route::get('auth/register', 'Auth\RegisterController2@getRegister');
+//Route::post('auth/register', ['as' => 'register', 'uses' => 'Auth\RegisterController2@postRegister']);
