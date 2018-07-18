@@ -31,6 +31,9 @@ Route::post('file-upgrading', 'KiController@fileUpgrading')->name('fileUpgrading
 Route::get('create', 'KiController@create')->name('create');
 Route::post('store', 'KiController@store')->name('store');
 
+Route::get('/send', 'EmailController@send');
+
+
 //Route::get('');
 
 //Route::get('auth/register', 'Auth\RegisterController2@getRegister');
