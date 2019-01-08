@@ -1,10 +1,19 @@
-@extends('layouts.app')
+@extends('vendor.installer.layouts.master')
 
-@section('content')
-    <div class="container">
-        <div class="row">
-            <form method="post" action="{{ url('dbconn') }}" class="tabs-wrap">
-                {{ csrf_field() }}
+@section('template_title')
+    {{ trans('installer_messages.environment.wizard.templateTitle') }}
+@endsection
+
+@section('title')
+    <i class="fa fa-magic fa-fw" aria-hidden="true"></i>
+    {!! trans('installer_messages.environment.wizard.title') !!}
+@endsection
+
+@section('container')
+    <div class="">
+
+        <form method="post" action="{{ route('LaravelInstaller::environmentSaveWizard') }}" class="tabs-wrap">
+            {{ csrf_field() }}
                 <div class="form-group {{ $errors->has('database_hostname') ? ' has-error ' : '' }}">
                     <label for="database_hostname">
                         {{ trans('installer_messages.environment.wizard.form.db_host_label') }}
@@ -76,8 +85,7 @@
                         <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
                     </button>
                 </div>
-            </form>
+        </form>
 
-        </div>
     </div>
 @endsection

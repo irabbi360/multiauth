@@ -3,12 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use File;
+use PDO;
 
 class KiController extends Controller
 {
+    public function dbCon()
+    {
+        // Test database connection
+        try{
+            $dbh = new pdo( 'mysql:host=127.0.0.1:3306;dbname=booking',
+                'root',
+                '',
+                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            die(json_encode(array(true)));
+        }
+        catch(\PDOException $ex){
+            die(json_encode(array(false)));
+        }
+    }
     /**
      * Display a listing of the resource.
      *
